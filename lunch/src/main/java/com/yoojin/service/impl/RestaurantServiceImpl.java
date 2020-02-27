@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yoojin.dao.RestaurantDao;
+import com.yoojin.dto.Member;
 import com.yoojin.dto.Restaurant;
 import com.yoojin.service.RestaurantService;
 
@@ -16,7 +17,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 	RestaurantDao rstntDao;
 	
 	@Override
-	public List<Restaurant> getRstntList(String name) throws Exception{
-		return rstntDao.getRstntList(name);
+	public List<Restaurant> getRstntList(String category, Member member) throws Exception{
+		return rstntDao.getRstntList(category, member);
 	}
 }

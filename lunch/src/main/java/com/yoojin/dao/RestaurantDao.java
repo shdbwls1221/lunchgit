@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.yoojin.dto.Member;
 import com.yoojin.dto.Restaurant;
 
 @Mapper
 public interface RestaurantDao {
 	
-	
-	public List<Restaurant> getRstntList(String name);
+	public List<Restaurant> getRstntList(String category, Member member);
 
 }

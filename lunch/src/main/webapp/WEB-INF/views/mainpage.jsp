@@ -9,7 +9,29 @@
 <title>메인페이지</title>
 </head>
 <script>
-function addFood(){
+
+/** 레스토랑 리스트 조회 **/
+function getRstntList(category){
+	var html = $("#rstntList").html();
+	var parent = $(".restaurant");
+	$.ajax({
+		url: "/rstnt/"+category,
+		method: "GET",
+		success: function(data){
+			var length = data.length;
+			var html = "";
+			for(var i=0; i<length; i++){
+				var str += html.replace("{rstntSeqno}", data.rstntSeqno)
+							.replace("{rstntName}", data.rstntName)
+							.replace("{rstntSeqno}", data.rstntSeqno)
+							.replace("{rstntLocation}", data.rstntLocation)
+							.replace("{registDate}", data.registDate);
+				parent.html(str);
+			}
+		}
+	});
+}
+function addFoodForm()(){
 	$("#addFoodDiv").prepend($("#addFoodForm").html());
 }
 function addRstnt(){
@@ -56,48 +78,33 @@ $("#foodButton").click(function(){
 <jsp:include page="/WEB-INF/views/header.jsp" />
 <!-- /header -->
 <span>${user.name}님 맛점하세요.</span><a class="logout" href="javascript:void(0)">로그아웃</a>
+<!-- category-container -->
 <div id="container">
-	<div class="tabmenu">
-		<ul>
-			<li><a href="javascript:void(0)">한식</a></li>
-			<li><a href="javascript:void(0)">중식</a></li>
-			<li><a href="javascript:void(0)">양식</a></li>
+	<div class="divide">
+		<div class="tabmenu">
+			<ul>
+				<li><a href="javascript:getRstntList('한식')">한식</a></li>
+				<li><a href="javascript:getRstntList('중식')">중식</a></li>
+				<li><a href="javascript:getRstntList('양식')">양식</a></li>
+				<li><a href="javascript:getRstntList('패스트푸드')">패스트푸드</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="divide">
+		<ul class="restaurant">
+
 		</ul>
-	</div>
-	<div id="restaurantList">
+		<div id="addRstntDiv">
+			<a href="javascript:addRstnt()">+</a>
+			<!-- <button onclick="addRstnt()">식당추가</button> -->
+		</div>
 		<div>
-			<a href="javascript:deleteRstnt()">X</a>
-			<h2>깡장집</h2>
-		</div>
-		<div class="foodList">
-			<table>
-				<tr>
-					<th>카츠동</th><td>6.0/10.0</td>
-				</tr>
-				<tr>
-					<th>가격</th><td>8000원</td>
-				</tr>
-				<tr>
-					<th colspan="2">설명</th>
-				</tr>
-				<tr>
-					<td colspan="2">무난했다.</td>
-				</tr>
-			</table>
-			<div id="addFoodDiv">
-				<a href="javascript:addFood()">+</a>
-			</div>
+			<a>더보기</a>
 		</div>
 	</div>
-	<div id="addRstntDiv">
-		<a href="javascript:addRstnt()">+</a>
-		<!-- <button onclick="addRstnt()">식당추가</button> -->
-	</div>
-	<div>
-		<a>더보기</a>
+	<div class="divide">
 	</div>
 </div>
-<!-- /container -->
 	<!-- 식당 추가 폼 -->
 	<div id="addRstntForm" style="display:none">
 		<!-- action="/main/addRstnt.do" -->
@@ -133,5 +140,14 @@ $("#foodButton").click(function(){
 <!-- footer -->
 <jsp:include page="/WEB-INF/views/footer.jsp" />
 <!-- /footer -->
+<script type="rv-template" id="rstntList">
+	<li>
+		<div onclick="location.href='/food/{rstntSeqno}'">
+			<h2>{rstntName}</h2><button onclick="deleteRstnt('{rstntSeqno}')">X</button>
+			<div class="rightrow">위치</div><div class="leftrow">{rstntLocation}</div>
+			<div class="rightrow">마지막 방문</div><div class="leftrow">{registDate}</div>
+		</div>
+	</li>
+    </script>
 </body>
 </html>

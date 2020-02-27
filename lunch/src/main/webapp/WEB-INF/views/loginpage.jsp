@@ -12,11 +12,19 @@
 		if($("#resultMsg").val() != null){
 			alert($("#resultMsg").val());
 		}
+		
+		$.ajax({
+			url: "/rstnt/"+${member.seqno}+"/"+category,
+			method: "GET",
+			success: function(){
+				
+			}
+		});
 	}
 	
 	/** 가입 페이지로 **/
 	function goJoin(){
-		location.href="${pageContext.request.contextPath}/member/join.do";
+		location.href='/member/join.do';
 	}
 </script>
 </head>

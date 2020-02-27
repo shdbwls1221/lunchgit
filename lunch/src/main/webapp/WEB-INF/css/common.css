@@ -1,8 +1,19 @@
-h1{
-	font-size: 
+h1{ 
+	font-size: 25px;
+}
+h2{
+	font-size: 20px;
+}
+.rstntList a{
+	float: right;
 }
 
 #header{
 	background-color: white;
 	text-align: center;
+}
+
+.container{
+	width: 30%;
+	padding: 20px 10px;
 }
