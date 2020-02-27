@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yoojin.dao.RestaurantDao"> 
+	<select id="getRstntList" parameterType="String" resultType="com.yoojin.dto.Restaurant">
+		SELECT 	  rstnt_seqno
+				, rstnt_name
+				, rstnt_location
+				, category
+				, register
+				, regist_date
+		FROM tb_restaurant
+		WHERE register = #{name}
+	</select>
+	<insert id="insertRstnt">
+		INSERT INTO tb_restaurant(
+			  rstnt_seqno
+			, rstnt_name
+			, rstnt_location,
+			, category
+			, register
+			, regist_date)
+		VALUES (
+			  #{rstntSeqno}
+			, #{rstntName}
+			, #{rstntLocation}
+			, #{category}
+			, #{register}
+			, SYSDATE
+		);
+	</insert>
+	<delete id="deleteRstnt" parameterType="String">
+		DELETE FROM tb_restaurant
+		WHERE seqno = #{value}
+	</delete>
+	<update id="updateRstnt" parameterType="int">
+		UPDATE tb_restaurant
+		SET rstnt_name = #{rstntName},
+			rstnt_location = #{rstntLocation},
+			category = #{category},
+			regist_date = SYSDATE;
+		WHERE seqno = #{seqno}
+	</update>
+</mapper>
