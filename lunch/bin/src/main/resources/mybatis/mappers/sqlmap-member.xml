@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.yoojin.dao.MemberDao"> 
-	<select id="checkName" parameterType="String" resultType="com.yoojin.dto.Member">
+<mapper namespace="memberDao"> 
+	<select id="checkId" parameterType="String" resultType="com.yoojin.dto.Member">
 		SELECT count(1)
 		FROM tb_member
-		WHERE name = #{value}
+		WHERE id = #{value}
 	</select>
 	<select id="getMember" parameterType="String" resultType="com.yoojin.dto.Member">
 		SELECT	  seqno
+				, id
+				, password
 				, name
 		FROM tb_member
 		WHERE id = #{value}
 	</select>
-	<select id="getMaxSeqno" resultType="_int">
-		SELECT MAX(seqno)
-		FROM tb_member
-	</select>
 	<insert id="insertMemeber">
 		INSERT INTO tb_member(
-			  seqno
+			  id
+			, password
 			, name)
 		VALUES (
-			  #{seqno}
+			  #{id}
+			, #{password}
 			, #{name}
 		)
 	</insert>
-	<delete id="deleteMember" parameterType="_int">
+	<delete id="deleteMember" parameterType="String">
 		DELETE FROM tb_member
-		WHERE seqno = #{value}
+		WHERE id = #{value}
 	</delete>
 	<update id="updateMember">
 		UPDATE tb_member

@@ -1,13 +1,13 @@
 package com.yoojin.dto;
 
 public class Member {
-	private String seqno;
+	private int seqno;
 	private String name;
 	
-	public String getSeqno() {
+	public int getSeqno() {
 		return seqno;
 	}
-	public void setSeqno(String seqno) {
+	public void setSeqno(int seqno) {
 		this.seqno = seqno;
 	}
 	public String getName() {
