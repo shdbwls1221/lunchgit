@@ -6,5 +6,6 @@ import com.yoojin.dto.Member;
 import com.yoojin.dto.Restaurant;
 
 public interface RestaurantService {
-	public List<Restaurant> getRstntList(String category, Member member) throws Exception;
+	public List<Restaurant> getRstntList(String category) throws Exception;
+	public int insertRstnt(Restaurant rstntForm) throws Exception;
 }

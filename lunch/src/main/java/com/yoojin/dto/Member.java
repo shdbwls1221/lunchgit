@@ -4,6 +4,11 @@ public class Member {
 	private int seqno;
 	private String name;
 	
+	public Member(int seqno, String name){
+		this.seqno = seqno;
+		this.name = name;
+	}
+	
 	public int getSeqno() {
 		return seqno;
 	}

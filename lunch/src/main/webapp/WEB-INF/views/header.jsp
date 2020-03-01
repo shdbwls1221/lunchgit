@@ -9,8 +9,5 @@
 <div id="header">
 	<h1>점심에 뭐 먹을까의 header입니다.</h1>
 </div>
-<c:if test="${user.name} != null and ${user.name} != ''">
-	<span>${user.name}님 맛점하세요.</span><a class="logout" href="javascript:void(0)">로그아웃</a>
-</c:if>
 </body>
 </html>

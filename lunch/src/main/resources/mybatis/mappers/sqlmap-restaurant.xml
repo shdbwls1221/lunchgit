@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yoojin.dao.RestaurantDao"> 
-	<select id="getRstntList" resultType="com.yoojin.dto.Restaurant">
+	<select id="getRstntList" parameterType="String" resultType="com.yoojin.dto.Restaurant">
 		SELECT 	  rstnt_seqno
 				, rstnt_name
 				, rstnt_location
@@ -9,10 +9,11 @@
 				, register
 				, regist_date
 		FROM tb_restaurant
-		WHERE category = #{category}
-		AND register = #{member.name}
+		<if test="category!='전체'">
+			WHERE category = '${category}'
+		</if>
 	</select>
-	<insert id="insertRstnt">
+	<insert id="insertRstnt" parameterType="com.yoojin.dto.Restaurant">
 		INSERT INTO tb_restaurant(
 			  rstnt_seqno
 			, rstnt_name
@@ -25,20 +26,8 @@
 			, #{rstntName}
 			, #{rstntLocation}
 			, #{category}
-			, #{register}
+			, '유진'
 			, SYSDATE
 		);
 	</insert>
-	<delete id="deleteRstnt" parameterType="String">
-		DELETE FROM tb_restaurant
-		WHERE seqno = #{value}
-	</delete>
-	<update id="updateRstnt" parameterType="int">
-		UPDATE tb_restaurant
-		SET rstnt_name = #{rstntName},
-			rstnt_location = #{rstntLocation},
-			category = #{category},
-			regist_date = SYSDATE;
-		WHERE seqno = #{seqno}
-	</update>
 </mapper>

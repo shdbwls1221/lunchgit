@@ -10,6 +10,6 @@ import com.yoojin.dto.Restaurant;
 @Mapper
 public interface RestaurantDao {
 	
-	public List<Restaurant> getRstntList(String category, Member member);
-
+	public List<Restaurant> getRstntList(String category);
+	public int insertRstnt(Restaurant rstntForm);
 }

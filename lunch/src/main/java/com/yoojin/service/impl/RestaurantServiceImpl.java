@@ -17,7 +17,12 @@ public class RestaurantServiceImpl implements RestaurantService {
 	RestaurantDao rstntDao;
 	
 	@Override
-	public List<Restaurant> getRstntList(String category, Member member) throws Exception{
-		return rstntDao.getRstntList(category, member);
+	public List<Restaurant> getRstntList(String category) throws Exception{
+		return rstntDao.getRstntList(category);
+	}
+	
+	@Override
+	public int insertRstnt(Restaurant rstntForm) throws Exception{
+		return rstntDao.insertRstnt(rstntForm);
 	}
 }
